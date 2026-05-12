@@ -74,38 +74,58 @@ function Logo({ light, onClick }) {
 }
 
 function Navbar({ count, onCart, page, setPage }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navBg = { background:'rgba(248,246,241,0.55)', backdropFilter:'blur(20px) saturate(180%)', WebkitBackdropFilter:'blur(20px) saturate(180%)', borderBottom:'1px solid rgba(200,190,178,0.2)', boxShadow:'0 1px 20px rgba(0,0,0,0.06)' };
+  const linkStyle = { fontSize:10, textTransform:'uppercase', letterSpacing:'0.4em', fontWeight:600, color:WB, textDecoration:'none', cursor:'pointer' };
+  const navigate = (fn) => { fn(); setMenuOpen(false); };
   return (
-    <nav className="navbar" style={{
-      position:'fixed', top:0, width:'100%', zIndex:50,
-      padding: '12px 64px',
-      display:'flex', justifyContent:'space-between', alignItems:'center',
-      background: 'rgba(248,246,241,0.55)',
-      backdropFilter: 'blur(20px) saturate(180%)',
-      WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-      borderBottom: '1px solid rgba(200,190,178,0.2)',
-      boxShadow: '0 1px 20px rgba(0,0,0,0.06)',
-    }}>
-      <div className="nav-links" style={{ flex:1, display:'flex', gap:40 }}>
-        <a className="nav-link" onClick={() => { setPage('home'); setTimeout(() => document.getElementById('collection')?.scrollIntoView({ behavior:'smooth' }), 50); }}
-          style={{ fontSize:10, textTransform:'uppercase', letterSpacing:'0.4em', fontWeight:600, color: WB, textDecoration:'none', cursor:'pointer' }}>
-          Collectie
-        </a>
-        <a className="nav-link" onClick={() => { setPage('about'); window.scrollTo({ top:0, behavior:'smooth' }); }}
-          style={{ fontSize:10, textTransform:'uppercase', letterSpacing:'0.4em', fontWeight:600, color: WB, textDecoration:'none', cursor:'pointer' }}>
-          Over Ons
-        </a>
-      </div>
-      <Logo light={false} onClick={() => { setPage('home'); window.scrollTo({ top:0, behavior:'smooth' }); }} />
-      <div style={{ flex:1, display:'flex', justifyContent:'flex-end', alignItems:'center', gap:16 }}>
-        <button className="cart-btn" onClick={onCart} style={{ position:'relative', background:'none', border:'none', cursor:'pointer', display:'flex', alignItems:'center', gap:8, transition:'opacity 0.2s' }}>
-          <div className="cart-pill" style={{ display:'flex', alignItems:'center', padding:'8px 20px', border:'1px solid rgba(106,74,52,0.2)', borderRadius:9999, transition:'border-color 0.2s, background 0.2s' }}>
-            <span style={{ fontSize:10, textTransform:'uppercase', letterSpacing:'0.3em', fontWeight:700, color: WB }}>Selectie</span>
-          </div>
+    <>
+      {/* Desktop */}
+      <nav className="navbar-desktop" style={{ ...navBg, position:'fixed', top:0, width:'100%', zIndex:50, padding:'12px 64px', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+        <div style={{ flex:1, display:'flex', gap:40 }}>
+          <a className="nav-link" onClick={() => navigate(() => { setPage('home'); setTimeout(() => document.getElementById('collection')?.scrollIntoView({ behavior:'smooth' }), 50); })} style={linkStyle}>Collectie</a>
+          <a className="nav-link" onClick={() => navigate(() => { setPage('about'); window.scrollTo({ top:0, behavior:'smooth' }); })} style={linkStyle}>Over Ons</a>
+        </div>
+        <Logo light={false} onClick={() => navigate(() => { setPage('home'); window.scrollTo({ top:0, behavior:'smooth' }); })} />
+        <div style={{ flex:1, display:'flex', justifyContent:'flex-end', alignItems:'center', gap:16 }}>
+          <button className="cart-btn" onClick={onCart} style={{ position:'relative', background:'none', border:'none', cursor:'pointer', display:'flex', alignItems:'center', gap:8 }}>
+            <div className="cart-pill" style={{ display:'flex', alignItems:'center', padding:'8px 20px', border:'1px solid rgba(106,74,52,0.2)', borderRadius:9999, transition:'border-color 0.2s, background 0.2s' }}>
+              <span style={{ fontSize:10, textTransform:'uppercase', letterSpacing:'0.3em', fontWeight:700, color:WB }}>Selectie</span>
+            </div>
+            <ShoppingBag size={22} color={WB} />
+            {count > 0 && <span style={{ position:'absolute', top:-4, right:-4, background:OG, color:'#fff', fontSize:8, width:16, height:16, borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:700 }}>{count}</span>}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobiel */}
+      <nav className="navbar-mobile" style={{ ...navBg, position:'fixed', top:0, width:'100%', zIndex:50, padding:'14px 20px', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+        <button onClick={() => setMenuOpen(o => !o)} style={{ background:'none', border:'none', cursor:'pointer', display:'flex', flexDirection:'column', gap:5, padding:4 }}>
+          <span style={{ display:'block', width:22, height:2, background:WB, borderRadius:2, transition:'transform 0.3s', transform: menuOpen ? 'rotate(45deg) translate(5px,5px)' : 'none' }} />
+          <span style={{ display:'block', width:22, height:2, background:WB, borderRadius:2, transition:'opacity 0.3s', opacity: menuOpen ? 0 : 1 }} />
+          <span style={{ display:'block', width:22, height:2, background:WB, borderRadius:2, transition:'transform 0.3s', transform: menuOpen ? 'rotate(-45deg) translate(5px,-5px)' : 'none' }} />
+        </button>
+        <Logo light={false} onClick={() => navigate(() => { setPage('home'); window.scrollTo({ top:0, behavior:'smooth' }); })} />
+        <button onClick={onCart} style={{ position:'relative', background:'none', border:'none', cursor:'pointer', padding:4 }}>
           <ShoppingBag size={22} color={WB} />
           {count > 0 && <span style={{ position:'absolute', top:-4, right:-4, background:OG, color:'#fff', fontSize:8, width:16, height:16, borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:700 }}>{count}</span>}
         </button>
-      </div>
-    </nav>
+      </nav>
+
+      {/* Mobiel menu uitklappen */}
+      {menuOpen && (
+        <div style={{ position:'fixed', top:52, left:0, width:'100%', zIndex:49, background:'rgba(248,246,241,0.97)', backdropFilter:'blur(20px)', borderBottom:'1px solid rgba(200,190,178,0.2)', display:'flex', flexDirection:'column', padding:'24px 20px', gap:24 }}>
+          {[
+            { label:'Collectie', fn:() => { setPage('home'); setTimeout(() => document.getElementById('collection')?.scrollIntoView({ behavior:'smooth' }), 50); }},
+            { label:'Over Ons', fn:() => { setPage('about'); window.scrollTo({ top:0, behavior:'smooth' }); }},
+            { label:'Contact', fn:() => { setPage('contact'); window.scrollTo({ top:0, behavior:'smooth' }); }},
+            { label:'FAQ', fn:() => { setPage('faq'); window.scrollTo({ top:0, behavior:'smooth' }); }},
+          ].map(item => (
+            <a key={item.label} onClick={() => navigate(item.fn)} style={{ fontSize:11, textTransform:'uppercase', letterSpacing:'0.4em', fontWeight:600, color:WB, cursor:'pointer' }}>{item.label}</a>
+          ))}
+        </div>
+      )}
+    </>
   );
 }
 
@@ -533,10 +553,10 @@ export default function App() {
         .social-icon{transition:opacity 0.2s,transform 0.2s;display:inline-flex}
         .social-icon:hover{opacity:1 !important;transform:scale(1.15)}
         .faq-btn:hover{background:rgba(106,74,52,0.04)}
-        @media(max-width:640px){
-          .navbar{padding:12px 20px !important}
-          .nav-links{gap:20px !important}
-          .cart-pill{display:none !important}
+        .navbar-mobile{display:none}
+        @media(max-width:768px){
+          .navbar-desktop{display:none !important}
+          .navbar-mobile{display:flex !important}
         }
       `}</style>
 
