@@ -555,7 +555,7 @@ export default function App() {
         .faq-btn:hover{background:rgba(106,74,52,0.04)}
         html,body{overflow-x:hidden;max-width:100%}
         .navbar-mobile{display:none}
-        @media(max-width:768px){
+        @media(max-width:640px){
           .navbar-desktop{display:none !important}
           .navbar-mobile{display:flex !important}
           .hero-inner{padding:0 24px !important}
