@@ -75,7 +75,7 @@ function Logo({ light, onClick }) {
 
 function Navbar({ count, onCart, page, setPage }) {
   return (
-    <nav style={{
+    <nav className="navbar" style={{
       position:'fixed', top:0, width:'100%', zIndex:50,
       padding: '12px 64px',
       display:'flex', justifyContent:'space-between', alignItems:'center',
@@ -85,7 +85,7 @@ function Navbar({ count, onCart, page, setPage }) {
       borderBottom: '1px solid rgba(200,190,178,0.2)',
       boxShadow: '0 1px 20px rgba(0,0,0,0.06)',
     }}>
-      <div style={{ flex:1, display:'flex', gap:40 }}>
+      <div className="nav-links" style={{ flex:1, display:'flex', gap:40 }}>
         <a className="nav-link" onClick={() => { setPage('home'); setTimeout(() => document.getElementById('collection')?.scrollIntoView({ behavior:'smooth' }), 50); }}
           style={{ fontSize:10, textTransform:'uppercase', letterSpacing:'0.4em', fontWeight:600, color: WB, textDecoration:'none', cursor:'pointer' }}>
           Collectie
@@ -533,6 +533,11 @@ export default function App() {
         .social-icon{transition:opacity 0.2s,transform 0.2s;display:inline-flex}
         .social-icon:hover{opacity:1 !important;transform:scale(1.15)}
         .faq-btn:hover{background:rgba(106,74,52,0.04)}
+        @media(max-width:640px){
+          .navbar{padding:12px 20px !important}
+          .nav-links{gap:20px !important}
+          .cart-pill{display:none !important}
+        }
       `}</style>
 
       <Navbar count={totalItems} onCart={() => setCartOpen(true)} page={page} setPage={setPage} />
