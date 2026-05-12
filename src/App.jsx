@@ -328,7 +328,18 @@ function ContactPage({ setPage }) {
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({ name:'', email:'', subject:'', message:'' });
   const set = k => e => setForm(f => ({ ...f, [k]: e.target.value }));
-  const submit = e => { e.preventDefault(); setSent(true); };
+  const [sending, setSending] = useState(false);
+  const submit = async e => {
+    e.preventDefault();
+    setSending(true);
+    const res = await fetch('https://formspree.io/f/xjglzbla', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: JSON.stringify(form),
+    });
+    setSending(false);
+    if (res.ok) setSent(true);
+  };
   const inputStyle = { width:'100%', background:'transparent', border:'none', borderBottom:`1px solid rgba(106,74,52,0.2)`, padding:'12px 0', fontSize:'1rem', fontFamily:serif, fontStyle:'italic', color:WB, outline:'none', marginBottom:32 };
 
   return (
@@ -360,12 +371,12 @@ function ContactPage({ setPage }) {
               </p>
               <form onSubmit={submit}>
                 <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'0 32px' }}>
-                  <div><label style={{ fontSize:9, textTransform:'uppercase', letterSpacing:'0.3em', fontWeight:700, color:'rgba(106,74,52,0.4)' }}>Naam</label><input required value={form.name} onChange={set('name')} style={inputStyle} placeholder="Jouw naam" /></div>
-                  <div><label style={{ fontSize:9, textTransform:'uppercase', letterSpacing:'0.3em', fontWeight:700, color:'rgba(106,74,52,0.4)' }}>E-mail</label><input required type="email" value={form.email} onChange={set('email')} style={inputStyle} placeholder="jouw@email.nl" /></div>
+                  <div><label style={{ fontSize:9, textTransform:'uppercase', letterSpacing:'0.3em', fontWeight:700, color:'rgba(106,74,52,0.4)' }}>Naam</label><input name="name" required value={form.name} onChange={set('name')} style={inputStyle} placeholder="Jouw naam" /></div>
+                  <div><label style={{ fontSize:9, textTransform:'uppercase', letterSpacing:'0.3em', fontWeight:700, color:'rgba(106,74,52,0.4)' }}>E-mail</label><input name="email" required type="email" value={form.email} onChange={set('email')} style={inputStyle} placeholder="jouw@email.nl" /></div>
                 </div>
                 <div>
                   <label style={{ fontSize:9, textTransform:'uppercase', letterSpacing:'0.3em', fontWeight:700, color:'rgba(106,74,52,0.4)' }}>Onderwerp</label>
-                  <select value={form.subject} onChange={set('subject')} style={{ ...inputStyle, cursor:'pointer' }}>
+                  <select name="subject" value={form.subject} onChange={set('subject')} style={{ ...inputStyle, cursor:'pointer' }}>
                     <option value="">Kies een onderwerp...</option>
                     <option>Vraag over mijn bestelling</option>
                     <option>Kaars op maat</option>
@@ -375,10 +386,10 @@ function ContactPage({ setPage }) {
                 </div>
                 <div>
                   <label style={{ fontSize:9, textTransform:'uppercase', letterSpacing:'0.3em', fontWeight:700, color:'rgba(106,74,52,0.4)' }}>Bericht</label>
-                  <textarea required rows={5} value={form.message} onChange={set('message')} style={{ ...inputStyle, resize:'vertical', borderBottom:'none', border:`1px solid rgba(106,74,52,0.2)`, borderRadius:12, padding:'16px', marginBottom:40 }} placeholder="Schrijf hier je bericht..." />
+                  <textarea name="message" required rows={5} value={form.message} onChange={set('message')} style={{ ...inputStyle, resize:'vertical', borderBottom:'none', border:`1px solid rgba(106,74,52,0.2)`, borderRadius:12, padding:'16px', marginBottom:40 }} placeholder="Schrijf hier je bericht..." />
                 </div>
-                <button className="btn-primary" type="submit" style={{ width:'100%', background:WB, color:W, border:'none', borderRadius:9999, padding:'18px 0', fontSize:10, textTransform:'uppercase', letterSpacing:'0.4em', fontWeight:700, cursor:'pointer' }}>
-                  Verstuur bericht
+                <button className="btn-primary" type="submit" disabled={sending} style={{ width:'100%', background:WB, color:W, border:'none', borderRadius:9999, padding:'18px 0', fontSize:10, textTransform:'uppercase', letterSpacing:'0.4em', fontWeight:700, cursor:sending?'wait':'pointer', opacity:sending?0.7:1 }}>
+                  {sending ? 'Versturen...' : 'Verstuur bericht'}
                 </button>
               </form>
             </>
