@@ -357,9 +357,8 @@ function ContactPage({ setPage }) {
         <div style={{ maxWidth:680, margin:'0 auto' }}>
           {sent ? (
             <div style={{ textAlign:'center', padding:'80px 0' }}>
-              <p style={{ fontSize:'3rem', marginBottom:24 }}>🕯️</p>
               <h2 style={{ fontFamily:serif, fontStyle:'italic', fontWeight:300, fontSize:'clamp(2rem,4vw,3rem)', color:DB, margin:'0 0 16px' }}>Bedankt voor je berichtje!</h2>
-              <p style={{ fontFamily:serif, fontSize:'1.1rem', fontStyle:'italic', color:'rgba(106,74,52,0.6)', lineHeight:1.8, margin:'0 0 40px' }}>We nemen zo snel mogelijk contact met je op. In de tussentijd mag je altijd nog een kaarsje uitzoeken. 😊</p>
+              <p style={{ fontFamily:serif, fontSize:'1.1rem', fontStyle:'italic', color:'rgba(106,74,52,0.6)', lineHeight:1.8, margin:'0 0 40px' }}>We nemen zo snel mogelijk contact met je op. In de tussentijd mag je altijd nog een kaarsje uitzoeken.</p>
               <button className="btn-primary" onClick={() => { setPage('home'); window.scrollTo({top:0}); }} style={{ display:'inline-flex', alignItems:'center', gap:12, padding:'16px 40px', background:WB, color:W, border:'none', borderRadius:9999, fontSize:10, textTransform:'uppercase', letterSpacing:'0.3em', fontWeight:700, cursor:'pointer' }}>
                 Naar de collectie <ArrowRight size={13} />
               </button>
