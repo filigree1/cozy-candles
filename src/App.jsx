@@ -262,7 +262,7 @@ function AboutPage({ setPage }) {
 
       {/* Verhaal */}
       <section style={{ padding:'clamp(64px,10vw,120px) clamp(24px,6vw,120px)', paddingTop:'clamp(100px,12vw,160px)', background:'radial-gradient(ellipse at 60% 50%, #5A3A24 0%, #1A1A1A 70%)' }}>
-        <div style={{ maxWidth:1100, margin:'0 auto', display:'grid', gridTemplateColumns:'1fr 1fr', gap:'clamp(48px,6vw,96px)', alignItems:'center' }}>
+        <div className="two-col-grid" style={{ maxWidth:1100, margin:'0 auto', display:'grid', gridTemplateColumns:'1fr 1fr', gap:'clamp(48px,6vw,96px)', alignItems:'center' }}>
           <div ref={ref1} style={fadeIn(v1)}>
             <p style={{ fontSize:9, textTransform:'uppercase', letterSpacing:'0.5em', fontWeight:700, color:OG, margin:'0 0 20px' }}>Hoe het begon</p>
             <h2 style={{ fontFamily:serif, fontSize:'clamp(2rem,4vw,3.2rem)', color:W, lineHeight:1.2, margin:'0 0 28px', fontWeight:300, fontStyle:'italic' }}>Een hobby tussen moeder en dochter.</h2>
@@ -281,7 +281,7 @@ function AboutPage({ setPage }) {
 
       {/* Groei */}
       <section style={{ padding:'clamp(64px,10vw,120px) clamp(24px,6vw,120px)' }}>
-        <div style={{ maxWidth:1100, margin:'0 auto', display:'grid', gridTemplateColumns:'1fr 1fr', gap:'clamp(48px,6vw,96px)', alignItems:'center' }}>
+        <div className="two-col-grid" style={{ maxWidth:1100, margin:'0 auto', display:'grid', gridTemplateColumns:'1fr 1fr', gap:'clamp(48px,6vw,96px)', alignItems:'center' }}>
           <div ref={ref3} style={{ ...fadeIn(v3, 0.1), aspectRatio:'4/5', background:'#D6C9B4', borderRadius:'1rem 4rem 1rem 4rem', overflow:'hidden', boxShadow:'0 30px 80px rgba(106,74,52,0.12)' }}>
             <img src={kaarsVerkoop} alt="kaarsen verkoop" style={{ width:'100%', height:'100%', objectFit:'cover' }} />
           </div>
@@ -302,7 +302,7 @@ function AboutPage({ setPage }) {
             <h2 style={{ fontFamily:serif, fontStyle:'italic', fontWeight:300, fontSize:'clamp(2rem,5vw,4rem)', color:W, margin:'0 0 16px' }}>Waarom Cozy Candles?</h2>
             <p style={{ fontFamily:serif, fontSize:'1.1rem', fontStyle:'italic', color:'rgba(248,246,241,0.45)', margin:0 }}>Elke kaars is een klein verhaal. Dit is het onze.</p>
           </div>
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:32 }}>
+          <div className="values-grid" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:32 }}>
             {[
               { title:'Handgegoten', text:'Elke kaars wordt met de hand gegoten — nooit in bulk, altijd met aandacht voor elk detail.' },
               { title:'Herbruikbaar glas', text:'Het glas is ontworpen om te blijven. Na het branden wordt het een vaasje, een potje of een drinkglas.' },
@@ -327,7 +327,7 @@ function AboutPage({ setPage }) {
         <p style={{ fontFamily:serif, fontSize:'1.1rem', fontStyle:'italic', color:'rgba(106,74,52,0.6)', margin:'0 0 40px', lineHeight:1.8 }}>
           Achter de schermen, nieuwe geuren, kaarsjes die branden — we delen het allemaal.
         </p>
-        <div style={{ display:'flex', justifyContent:'center', gap:20, marginBottom:64 }}>
+        <div className="social-btns" style={{ display:'flex', justifyContent:'center', gap:20, marginBottom:64 }}>
           <a href="https://instagram.com/cozycandles" target="_blank" rel="noopener noreferrer"
             style={{ display:'inline-flex', alignItems:'center', gap:12, padding:'14px 28px', background:WB, color:W, borderRadius:9999, fontSize:10, textTransform:'uppercase', letterSpacing:'0.3em', fontWeight:700, textDecoration:'none' }}>
             <IconInstagram size={16} color={W} /> Instagram
@@ -389,7 +389,7 @@ function ContactPage({ setPage }) {
                 Heb je een vraag over een bestelling, wil je een kaars op maat, of gewoon even hallo zeggen? Vul het formulier in en we komen er zo snel mogelijk op terug.
               </p>
               <form onSubmit={submit}>
-                <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'0 32px' }}>
+                <div className="contact-grid" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'0 32px' }}>
                   <div><label style={{ fontSize:9, textTransform:'uppercase', letterSpacing:'0.3em', fontWeight:700, color:'rgba(106,74,52,0.4)' }}>Naam</label><input name="name" required value={form.name} onChange={set('name')} style={inputStyle} placeholder="Jouw naam" /></div>
                   <div><label style={{ fontSize:9, textTransform:'uppercase', letterSpacing:'0.3em', fontWeight:700, color:'rgba(106,74,52,0.4)' }}>E-mail</label><input name="email" required type="email" value={form.email} onChange={set('email')} style={inputStyle} placeholder="jouw@email.nl" /></div>
                 </div>
@@ -458,7 +458,7 @@ function FAQPage({ setPage }) {
             </div>
           ))}
         </div>
-        <div style={{ maxWidth:760, margin:'64px auto 0', textAlign:'center', padding:48, background:SB, borderRadius:24 }}>
+        <div className="faq-cta-box" style={{ maxWidth:760, margin:'64px auto 0', textAlign:'center', padding:48, background:SB, borderRadius:24 }}>
           <p style={{ fontFamily:serif, fontSize:'1.4rem', fontStyle:'italic', color:DB, margin:'0 0 8px' }}>Staat je vraag er niet bij?</p>
           <p style={{ fontFamily:serif, fontSize:'1rem', fontStyle:'italic', color:'rgba(106,74,52,0.6)', margin:'0 0 28px' }}>We helpen je graag verder.</p>
           <button className="btn-primary" onClick={() => { setPage('contact'); window.scrollTo({top:0,behavior:'smooth'}); }} style={{ display:'inline-flex', alignItems:'center', gap:10, padding:'14px 36px', background:WB, color:W, border:'none', borderRadius:9999, fontSize:10, textTransform:'uppercase', letterSpacing:'0.3em', fontWeight:700, cursor:'pointer' }}>
@@ -475,7 +475,7 @@ function FooterSection({ setPage }) {
   return (
     <footer style={{ background:'#161616', color:W, position:'relative', overflow:'hidden' }}>
       <div style={{ position:'absolute', top:'-20%', left:'30%', width:'60vw', height:'60vw', background:'rgba(255,255,255,0.04)', borderRadius:'50%', filter:'blur(120px)', pointerEvents:'none' }} />
-      <div style={{ maxWidth:1280, margin:'0 auto', padding:'80px 64px 48px', display:'grid', gridTemplateColumns:'1fr 2fr', gap:64, position:'relative', zIndex:1 }}>
+      <div className="footer-outer" style={{ maxWidth:1280, margin:'0 auto', padding:'80px 64px 48px', display:'grid', gridTemplateColumns:'1fr 2fr', gap:64, position:'relative', zIndex:1 }}>
         <div style={{ display:'flex', flexDirection:'column', gap:28 }}>
           <span style={{ fontFamily:serif, fontSize:'1.75rem', fontWeight:300, color:W }}>cozycandles</span>
           <p style={{ fontSize:9, letterSpacing:'0.25em', lineHeight:2.2, color:'rgba(248,246,241,0.3)', textTransform:'uppercase', margin:0 }}>ZACHT, RUSTIG & TIJDLOOS.<br/>HANDGEGOTEN MET LIEFDE.</p>
@@ -488,7 +488,7 @@ function FooterSection({ setPage }) {
             </a>
           </div>
         </div>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:40 }}>
+        <div className="footer-links" style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:40 }}>
           <div style={{ display:'flex', flexDirection:'column', gap:20 }}>
             <h6 style={{ fontSize:9, textTransform:'uppercase', letterSpacing:'0.5em', fontWeight:700, color:OG, margin:0 }}>Atelier</h6>
             <ul style={{ listStyle:'none', padding:0, margin:0, display:'flex', flexDirection:'column', gap:14 }}>
@@ -553,10 +553,22 @@ export default function App() {
         .social-icon{transition:opacity 0.2s,transform 0.2s;display:inline-flex}
         .social-icon:hover{opacity:1 !important;transform:scale(1.15)}
         .faq-btn:hover{background:rgba(106,74,52,0.04)}
+        html,body{overflow-x:hidden;max-width:100%}
         .navbar-mobile{display:none}
         @media(max-width:768px){
           .navbar-desktop{display:none !important}
           .navbar-mobile{display:flex !important}
+          .hero-inner{padding:0 24px !important}
+          .hero-btn{padding:14px 24px !important;font-size:9px !important;letter-spacing:0.25em !important;gap:10px !important}
+          .collection-section{padding:48px 20px !important}
+          .collection-grid{grid-template-columns:1fr 1fr !important;gap:0 16px !important}
+          .two-col-grid{grid-template-columns:1fr !important}
+          .values-grid{grid-template-columns:1fr !important}
+          .social-btns{flex-direction:column !important;align-items:center !important}
+          .footer-outer{padding:48px 24px 32px !important;grid-template-columns:1fr !important;gap:32px !important}
+          .footer-links{grid-template-columns:1fr 1fr !important;gap:24px !important}
+          .contact-grid{grid-template-columns:1fr !important}
+          .faq-cta-box{padding:28px 20px !important}
         }
       `}</style>
 
@@ -580,7 +592,7 @@ export default function App() {
             </svg>
             <video autoPlay muted loop playsInline src={heroVideo} onLoadedData={e => e.target.playbackRate = 1} style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', opacity:0.75 }} />
             <div style={{ position:'absolute', inset:0, background:'linear-gradient(to bottom, rgba(26,26,26,0.35) 0%, transparent 45%, rgba(26,26,26,0.95) 100%)' }} />
-            <div style={{ position:'relative', zIndex:10, flex:1, display:'flex', alignItems:'center', justifyContent:'center', padding:'0 64px' }}>
+            <div className="hero-inner" style={{ position:'relative', zIndex:10, flex:1, display:'flex', alignItems:'center', justifyContent:'center', padding:'0 64px' }}>
               <div style={{ width:'100%', maxWidth:960 }}>
                 <div style={{ display:'flex', flexDirection:'column', alignItems:'center' }}>
                   <p style={{ fontFamily:serif, fontSize:'clamp(1rem,2vw,1.5rem)', letterSpacing:'0.3em', color:'rgba(248,246,241,0.75)', textTransform:'uppercase', lineHeight:1, transform:'translateX(-20%) rotate(-2deg)', alignSelf:'flex-start', marginLeft:'36%', marginBottom:'-0.2em' }}>For</p>
@@ -590,7 +602,7 @@ export default function App() {
               </div>
             </div>
             <div style={{ position:'relative', zIndex:20, display:'flex', justifyContent:'center', paddingBottom:64, paddingTop:32 }}>
-              <a href="#collection" className="btn-light" style={{ display:'inline-flex', alignItems:'center', gap:16, padding:'18px 48px', background:'rgba(248,246,241,0.97)', color:WB, borderRadius:9999, fontSize:11, textTransform:'uppercase', letterSpacing:'0.4em', fontWeight:700, boxShadow:'0 8px 40px rgba(0,0,0,0.2)', transition:'background 0.2s,transform 0.15s' }}>
+              <a href="#collection" className="btn-light hero-btn" style={{ display:'inline-flex', alignItems:'center', gap:16, padding:'18px 48px', background:'rgba(248,246,241,0.97)', color:WB, borderRadius:9999, fontSize:11, textTransform:'uppercase', letterSpacing:'0.4em', fontWeight:700, boxShadow:'0 8px 40px rgba(0,0,0,0.2)', transition:'background 0.2s,transform 0.15s' }}>
                 Ontdek de Collectie <ArrowRight size={14} />
               </a>
             </div>
@@ -621,14 +633,14 @@ export default function App() {
           <SectionWave from={W} to={SB} />
 
           {/* Collectie */}
-          <section id="collection" style={{ padding:'96px 64px', background:'#EDE6DA', backgroundImage:`url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E")`, backgroundSize:'300px' }}>
+          <section id="collection" className="collection-section" style={{ padding:'96px 64px', background:'#EDE6DA', backgroundImage:`url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E")`, backgroundSize:'300px' }}>
             <div style={{ maxWidth:1280, margin:'0 auto 80px', display:'flex', flexDirection:'column', alignItems:'center', gap:20 }}>
               <h2 style={{ fontFamily:serif, fontSize:'clamp(2.5rem,7vw,6rem)', color:DB, letterSpacing:'-0.02em', textAlign:'center', margin:0 }}>De Collectie</h2>
               <div style={{ width:48, height:1, background:OG }} />
               <p style={{ fontSize:10, textTransform:'uppercase', letterSpacing:'0.4em', fontWeight:700, color:'rgba(106,74,52,0.4)', fontStyle:'italic', margin:0 }}>9 Ambachtelijke geuren, geïnspireerd op kleine geluksmomenten.</p>
               <p style={{ fontFamily:serif, fontSize:'1rem', fontStyle:'italic', color:'rgba(106,74,52,0.55)', textAlign:'center', margin:0, lineHeight:1.8 }}>Staat jouw favoriete geur of kaarsoort er niet tussen? Stuur ons een berichtje — we bekijken graag de mogelijkheden om die speciaal voor jou te maken.</p>
             </div>
-            <div style={{ maxWidth:1280, margin:'0 auto', display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'0 48px' }}>
+            <div className="collection-grid" style={{ maxWidth:1280, margin:'0 auto', display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'0 48px' }}>
               {productsWithAdd.map((p,i) => <ProductCard key={p.id} product={p} index={i} />)}
             </div>
           </section>
