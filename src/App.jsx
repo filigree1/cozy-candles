@@ -195,7 +195,7 @@ function ProductCard({ product, index }) {
   const handleAdd = () => { product.onAdd(product); setAdded(true); setTimeout(() => setAdded(false), 1500); };
 
   return (
-    <div ref={ref} onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
+    <div ref={ref} onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)} className="product-card"
       style={{ display:'flex', flexDirection:'column', marginBottom:48, opacity:vis?1:0, transform:vis?`translateY(${offsets[index%3]}px)`:`translateY(${offsets[index%3]+64}px)`, transition:'opacity 0.9s ease, transform 0.9s ease' }}>
       <div style={{ aspectRatio:'4/5', width:'100%', background:product.bg, position:'relative', overflow:'hidden', borderRadius:`${sh.tl} ${sh.tr} ${sh.br} ${sh.bl}`, boxShadow:hov?'0 20px 60px rgba(106,74,52,0.2)':'0 4px 20px rgba(106,74,52,0.1)', transition:'box-shadow 0.5s ease' }}>
         {product.image ? (
@@ -562,6 +562,7 @@ export default function App() {
           .hero-btn{padding:14px 24px !important;font-size:9px !important;letter-spacing:0.25em !important;gap:10px !important}
           .collection-section{padding:48px 20px !important}
           .collection-grid{grid-template-columns:1fr 1fr !important;gap:0 16px !important}
+          .product-card{transform:translateY(0) !important;margin-bottom:32px !important}
           .two-col-grid{grid-template-columns:1fr !important}
           .values-grid{grid-template-columns:1fr !important}
           .social-btns{flex-direction:column !important;align-items:center !important}
